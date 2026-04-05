@@ -1,0 +1,7 @@
+[package]
+name = "dd-helper-cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dd-helper-core = { version = "0.1.0", path = "../dd-helper-core" }

@@ -1,0 +1,3 @@
+[workspace]
+resolver = "3"
+members = ["dd-helper-cli", "dd-helper-core"]
