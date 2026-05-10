@@ -1,11 +1,20 @@
-use dd_helper_core::AbilityScores;
+use dd_helper_core::Character;
+use dd_helper_core::Class;
+use dd_helper_core::Race;
 
 fn main() {
-    let mut a = AbilityScores::new();
-    a.strength.value = 16;
-    println!("{:?}", a);
-
-    for ability in a.iter() {
-        println!("{}: {} ({})",ability.0,ability.1.value,ability.1.modifier());
-    }
+    let mut me = Character::new(
+        String::from("Gaston"),
+        String::from("LeVostre"),
+        String::from("Jean Roelens"),
+        36,
+        Race::SimicHybrid,
+        Class::Fighter,
+        1,
+    );
+    me.display_sheet();
+    me.apply_dmg(13);
+    me.display_sheet();
+    me.heal_hp(50);
+    me.display_sheet();
 }
