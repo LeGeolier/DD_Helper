@@ -14,7 +14,7 @@ pub struct Character {
     race: Race,
     class: Class,
     level: u8,
-    proeficient_skills: Vec<Skills>,
+    proficient_skills: Vec<Skills>,
     saving_throw_proficiencies: Vec<Ability>,
     armor_class: i32,
 }
@@ -42,7 +42,7 @@ impl Character {
             race,
             class,
             level,
-            proeficient_skills: init_skills,
+            proficient_skills: init_skills,
             saving_throw_proficiencies: init_saving_throw_skills,
             armor_class: 10,
         }
@@ -54,7 +54,7 @@ impl Character {
 
     pub fn get_skill_modifier(&self, target_skill: &Skills) -> i8 {
         let base = target_skill.skill_modifier(self.ability_scores());
-        if self.proeficient_skills().contains(target_skill) {
+        if self.proficient_skills().contains(target_skill) {
             base + self.proficiency() as i8
         } else {
             base
@@ -63,7 +63,7 @@ impl Character {
 
     pub fn get_save_modifier(&self, target_save_throw: &Ability) -> i8 {
         let base = target_save_throw.ability_modifier(self.ability_scores());
-        if self.proeficient_saving_throw().contains(target_save_throw) {
+        if self.proficient_saving_throw().contains(target_save_throw) {
             base + self.proficiency() as i8
         } else {
             base
@@ -71,11 +71,7 @@ impl Character {
     }
 
     pub fn gain_proficiency_in_skills(&mut self, new_skill: Skills) {
-        self.proeficient_skills.push(new_skill);
-    }
-
-    pub fn gain_proficiency_in_ability(&mut self, new_ability: Ability) {
-        self.saving_throw_proficiencies.push(new_ability);
+        self.proficient_skills.push(new_skill);
     }
 
     pub fn gain_saving_throw_proficiency(&mut self, new_proficiency: Ability) {
@@ -121,11 +117,11 @@ impl Character {
         self.level
     }
 
-    pub fn proeficient_skills(&self) -> &Vec<Skills> {
-        &self.proeficient_skills
+    pub fn proficient_skills(&self) -> &Vec<Skills> {
+        &self.proficient_skills
     }
 
-    pub fn proeficient_saving_throw(&self) -> &Vec<Ability> {
+    pub fn proficient_saving_throw(&self) -> &Vec<Ability> {
         &self.saving_throw_proficiencies
     }
 
