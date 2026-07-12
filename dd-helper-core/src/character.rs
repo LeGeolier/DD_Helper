@@ -4,6 +4,12 @@ use crate::Race;
 use crate::ability::Ability;
 use crate::skills::Skills;
 
+#[derive(Debug)]
+pub enum DamageOutcome {
+    Conscious,
+    Unconscious,
+    InstantDeath,
+}
 pub struct Character {
     name: String,
     surname: String,
@@ -78,8 +84,15 @@ impl Character {
         self.saving_throw_proficiencies.push(new_proficiency);
     }
 
-    pub fn apply_dmg(&mut self, damage: i32) {
+    pub fn apply_dmg(&mut self, damage: i32) -> DamageOutcome {
         self.current_hp -= damage;
+        if self.current_hp > 0 {
+            DamageOutcome::Conscious
+        } else if self.current_hp <= -self.max_hp() {
+            DamageOutcome::InstantDeath
+        } else {
+            DamageOutcome::Unconscious
+        }
     }
 
     pub fn heal_hp(&mut self, heal: i32) {
